@@ -1,3 +1,13 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.keyboard-row {
+  max-width: 500px;
+}
+
+.keyboard {
+  max-width: 500px;
+  min-width: 320px;
+  width: 100%;
+}
