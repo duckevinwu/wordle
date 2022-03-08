@@ -20,10 +20,14 @@ const Game = () => {
   const [clockActive, setClockActive] = useState(false);
   const [winModalOpen, setWinModalOpen] = useState(false);
   const [loseModalOpen, setLoseModalOpen] = useState(false);
+  const [loaded, setLoaded] = useState(false);
 
   // load the answer word
   useEffect(() => {
-    setAnswer('hello');
+    setTimeout(() => {
+      setAnswer('hello');
+      setLoaded(true);
+    }, 3000)
   }, [])
 
   const handleChar = (c) => {
@@ -119,7 +123,7 @@ const Game = () => {
         </div>
       </div>
       <Toast show={toast.show} message={toast.message} closeToast={closeToast} />
-      <StartModal show={startModalOpen} start={startGame}/>
+      <StartModal show={startModalOpen} start={startGame} loaded={loaded}/>
       <WinModal  show={winModalOpen} time={time} />
       <LoseModal show={loseModalOpen} time={time} />
     </>
