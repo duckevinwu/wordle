@@ -25,7 +25,7 @@ const WinModal = ({
       leaveTo="transform scale-95 opacity-0"
       className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
     >
-      <div className="p-3 w-72 h-100 border rounded-lg shadow-2xl bg-white flex flex-col items-center">
+      <div className="p-3 w-72 border rounded-lg shadow-2xl bg-white flex flex-col items-center">
         <div className="w-full mb-10">
           <div className="w-full flex justify-end">
             <h1 className="mb-2 uppercase text-sm tracking-widest text-gray-500">Your score</h1>

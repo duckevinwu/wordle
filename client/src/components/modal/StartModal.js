@@ -22,8 +22,11 @@ const StartModal = ({
       leaveTo="transform scale-95 opacity-0"
       className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
     >
-      <div className="p-3 w-64 h-96 border rounded shadow-lg bg-white">
-        <button onClick={start}>Start</button>
+      <div className="p-3 w-72 border rounded-lg shadow-2xl bg-white flex flex-col items-center">
+        <div className="flex h-36 items-center">
+          <p>Logo</p>
+        </div>
+        <button onClick={start} className="w-full bg-black text-white p-2 rounded hover:bg-blue-400 hover:text-black transition duration-300">Start game</button>
       </div>
     </Transition>
   )
