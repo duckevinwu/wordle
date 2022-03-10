@@ -6,10 +6,15 @@ const db = new sqlite3.Database(dbPath, (err) => {
   else console.log('connected to database');
 });
 
-const select = (sql, params) => {
+const select = (sql, params, callback) => {
   db.all(sql, params, (err, rows) => {
-    if (err) return {status: 'error', message: err.message}
-    return {status: 'success', rows: rows}
+    if (err) {
+      console.log(err.message);
+      callback({status: 'error'});
+    } else {
+      if (rows.length !== 1) callback({status: 'error'});
+      else callback({status: 'success', rows: rows});
+    }
   })
 }
 

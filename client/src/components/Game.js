@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 
 import Navbar from './navbar/Navbar';
 import Board from './board/Board';
@@ -21,21 +22,40 @@ const Game = () => {
   const [winModalOpen, setWinModalOpen] = useState(false);
   const [loseModalOpen, setLoseModalOpen] = useState(false);
   const [loaded, setLoaded] = useState(false);
+  const { challengeId } = useParams();
 
   // load the answer word
   useEffect(() => {
-    // call api to get word
-    fetch('http://localhost:8080/api/v1/game')
-      .then(response => response.json())
-      .then(result => {
-        console.log(result.answer);
-        setAnswer(result.answer);
-        setLoaded(true);
-      })
-      .catch(error => {
-        console.log(error);
-      })
-  }, [])
+    // function to call api to get word
+    const getWord = () => {
+      fetch('http://localhost:8080/api/v1/game')
+        .then(response => response.json())
+        .then(result => {
+          console.log(result.answer);
+          setAnswer(result.answer);
+          setLoaded(true);
+        })
+        .catch(error => {
+          console.log(error);
+        })
+    }
+
+    if (challengeId) {
+      fetch(`http://localhost:8080/api/v1/challenge?id=${challengeId}`)
+        .then(response => response.json())
+        .then(result => {
+          console.log(result);
+          setAnswer(result.answer);
+          setLoaded(true);
+        })
+        .catch(error => {
+          console.log(error);
+          getWord();
+        })
+    } else {
+      getWord();
+    }
+  }, [challengeId])
 
   const handleChar = (c) => {
     if (guesses.length >= 6 || finished || revealing ||

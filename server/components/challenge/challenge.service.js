@@ -10,6 +10,13 @@ const generateChallenge = (answer, callback) => {
   });
 }
 
+const getChallenge = (challengeId, callback) => {
+  challengeDataAccess.getChallenge(challengeId, (res) => {
+    callback(res);
+  })
+}
+
 module.exports = {
-  generateChallenge: generateChallenge
+  generateChallenge: generateChallenge,
+  getChallenge: getChallenge
 }

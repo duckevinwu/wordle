@@ -5,12 +5,23 @@ const insertChallenge = (id, answer, callback) => {
     INSERT INTO Challenge (ChallengeID, Word)
     VALUES (?, ?)
   `;
-
   db.insert(insertQuery, [id, answer], (res) => {
     callback({status: res.status, id: id});
   });
 }
 
+const getChallenge = (id, callback) => {
+  const selectQuery = `
+    SELECT Word
+    FROM Challenge
+    WHERE ChallengeID = ?
+  `;
+  db.select(selectQuery, [id], (res) => {
+    callback(res);
+  });
+}
+
 module.exports = {
-  insertChallenge: insertChallenge
+  insertChallenge: insertChallenge,
+  getChallenge: getChallenge
 }

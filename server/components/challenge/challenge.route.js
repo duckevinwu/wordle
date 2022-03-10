@@ -14,11 +14,17 @@ router.route('/')
     });
   })
 
-router.route('/:id')
-  // GET /api/v1/challenge/:id - visit a challenge
-  .get(async (req, res) => {
-    const challengeId = req.params.id;
-    res.send(challengeId);
+  // GET /api/v1/challenge - visit a challenge
+  .get((req, res) => {
+    const challengeId = req.query.id;
+    challengeService.getChallenge(challengeId, (result) => {
+      const status = result.status;
+      if (status === 'error') res.status(500).send();
+      else {
+        const answer = result.rows[0]['Word'];
+        res.status(200).send({answer: answer});
+      }
+    })
   })
 
 module.exports = router;
