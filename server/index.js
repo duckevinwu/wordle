@@ -12,6 +12,9 @@ app.use(cors({
   origin: 'http://localhost:3000'
 }));
 
+// parse json body
+app.use(express.json());
+
 // game routes
 app.use(`${routePrefix}/game`, gameRoutes);
 

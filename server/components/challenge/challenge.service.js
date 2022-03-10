@@ -1,13 +1,13 @@
+const challengeDataAccess = require('./challenge.data.js');
 const Snowflake = require('../utils/snowflake/snowflake.js');
 
 const snowflake = new Snowflake(0);
 
-const generateChallenge = () => {
+const generateChallenge = (answer, callback) => {
   const challengeId = snowflake.generateId();
-
-  // insert into challenge into database
-
-  // update the recently submitted solution
+  challengeDataAccess.insertChallenge(challengeId, answer, (res) => {
+    callback({ status: res.status, id: challengeId });
+  });
 }
 
 module.exports = {

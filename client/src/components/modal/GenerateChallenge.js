@@ -1,15 +1,32 @@
 import { useState } from 'react';
 
 const GenerateChallenge = ({
-  className
+  className,
+  answer
 }) => {
   const [status, setStatus] = useState('not generated');
+  const [challengeId, setChallengeId] = useState('');
 
+  // generate a challenge
   const generate = () => {
     setStatus('loading');
-    setTimeout(() => {
+    fetch('http://localhost:8080/api/v1/challenge', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ answer: answer })
+    })
+    .then(response => response.json())
+    .then(result => {
+      console.log(result);
+      setChallengeId(result.id);
       setStatus('generated');
-    }, 3000)
+    })
+    .catch(error => {
+      console.log(error);
+      setStatus('not generated');
+    });
   }
 
   const selectLink = (e) => {
@@ -17,7 +34,7 @@ const GenerateChallenge = ({
   }
 
   if (status === 'generated') {
-    return <input className={`${className} w-full border border-black rounded p-2 caret-transparent text-center`} value="localhost:3000" onFocus={selectLink}></input>
+    return <input className={`${className} w-full border border-black rounded p-2 caret-transparent text-center`} value={`localhost:3000/${challengeId}`} onFocus={selectLink} readOnly></input>
   } else if (status === 'not generated') {
     return (
       <button onClick={generate} className={`${className} w-full border border-black rounded p-2 hover:border-blue-500 hover:text-blue-500 transition duration-250`}>

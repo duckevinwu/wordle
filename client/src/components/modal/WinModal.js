@@ -6,7 +6,8 @@ import GenerateChallenge from './GenerateChallenge';
 
 const WinModal = ({
   show,
-  time
+  time,
+  answer
 }) => {
   const [isOpen, setIsOpen] = useState(false);
 
@@ -49,7 +50,7 @@ const WinModal = ({
           </div>
         </div>
         <WordStats className="w-full mb-10" />
-        <GenerateChallenge className="mb-2" />
+        <GenerateChallenge className="mb-2" answer={answer} />
         <a href="/" className="w-full">
           <button className="w-full bg-black text-white p-2 rounded hover:bg-blue-400 hover:text-black transition duration-300">Play again</button>
         </a>

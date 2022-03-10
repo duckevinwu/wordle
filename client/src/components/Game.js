@@ -130,9 +130,9 @@ const Game = () => {
         </div>
       </div>
       <Toast show={toast.show} message={toast.message} closeToast={closeToast} />
-      <StartModal show={startModalOpen} start={startGame} loaded={loaded}/>
-      <WinModal  show={winModalOpen} time={time} />
-      <LoseModal show={loseModalOpen} time={time} />
+      <StartModal show={startModalOpen} start={startGame} loaded={loaded} />
+      <WinModal  show={winModalOpen} time={time} answer={answer} />
+      <LoseModal show={loseModalOpen} time={time} answer={answer} />
     </>
   )
 }

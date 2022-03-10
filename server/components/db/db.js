@@ -13,10 +13,14 @@ const select = (sql, params) => {
   })
 }
 
-const insert = (sql, params) => {
+const insert = (sql, params, callback) => {
   db.run(sql, params, (err) => {
-    if (err) return {status: 'error', message: err.message}
-    return {status: 'success'}
+    if (err) {
+      console.log(err.message);
+      callback({status: 'error'});
+    } else {
+      callback({status: 'success'});
+    }
   })
 }
 
