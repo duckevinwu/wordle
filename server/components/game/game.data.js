@@ -1,4 +1,5 @@
 const fs = require('fs');
+const db = require('../db/db.js');
 
 const answerWordsPath = './data/wordle-answers-alphabetical.txt';
 const guessWordsPath = './data/wordle-allowed-guesses.txt';
@@ -23,6 +24,19 @@ const loadWordsTxt = async (path) => {
   }
 }
 
+// insert solution data into db
+const insertSolution = async (solution) => {
+  const {word, timeSolved, attempts, solved, startWord, solveTime} = solution;
+  const insertQuery = `
+    INSERT INTO Solution (Word, DateSolved, Attempts, Solved, StartWord, SolveTime)
+    VALUES (?, ?, ?, ?, ?, ?)
+  `;
+  const params = [word, timeSolved, attempts, solved, startWord, solveTime];
+  const res = db.insert(insertQuery, params);
+  return res.status;
+}
+
 module.exports = {
-  loadAllWords: loadAllWords
+  loadAllWords: loadAllWords,
+  insertSolution: insertSolution
 }

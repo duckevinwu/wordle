@@ -16,3 +16,8 @@ const insert = (sql, params) => {
     return {status: 'success'}
   })
 }
+
+module.exports = {
+  select: select,
+  insert: insert
+}

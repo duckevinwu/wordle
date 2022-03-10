@@ -10,9 +10,12 @@ router.route('/')
     res.send(word);
   })
 
-  // POST /api/v1/game - submit a solution
+router.route('/solution')
+  // POST /apiv1/solution - submit a solution
   .post(async (req, res) => {
-    
+    const solutionData = req.body;
+    const status = await gameService.insertSolution(solutionData);
+    res.send(status);
   })
 
 router.route('/valid')
