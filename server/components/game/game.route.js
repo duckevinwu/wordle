@@ -7,7 +7,7 @@ router.route('/')
   // GET /api/v1/game - get a new game
   .get(async (req, res) => {
     const word = await gameService.getRandomAnswerWord();
-    res.send(word);
+    res.status(200).send({answer: word});
   })
 
 router.route('/solution')

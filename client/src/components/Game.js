@@ -24,10 +24,17 @@ const Game = () => {
 
   // load the answer word
   useEffect(() => {
-    setTimeout(() => {
-      setAnswer('hello');
-      setLoaded(true);
-    }, 3000)
+    // call api to get word
+    fetch('http://localhost:8080/api/v1/game')
+      .then(response => response.json())
+      .then(result => {
+        console.log(result.answer);
+        setAnswer(result.answer);
+        setLoaded(true);
+      })
+      .catch(error => {
+        console.log(error);
+      })
   }, [])
 
   const handleChar = (c) => {
