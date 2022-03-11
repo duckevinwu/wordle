@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Transition } from '@headlessui/react'
+import { formatTime } from '../../utils/utils.js';
 
 import WordStats from './WordStats';
 import GenerateChallenge from './GenerateChallenge';
@@ -83,7 +84,7 @@ const WinModal = ({
                     <p className="text-xs text-gray-500">guesses</p>
                   </div>
                   <div className="flex flex-col items-center">
-                    <p className="text-2xl">{time}</p>
+                    <p className="text-2xl">{formatTime(time)}</p>
                     <p className="text-xs text-gray-500">time</p>
                   </div>
                 </div>

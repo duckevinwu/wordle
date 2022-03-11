@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { formatTime } from '../../utils/utils.js';
 
 const Clock = ({
   className,
@@ -32,17 +33,10 @@ const Clock = ({
     }
   }, [finished, time, setFinalTime])
 
-  const convertTime = (x) => {
-    const totalSeconds = x / 1000;
-    const mins = Math.floor(totalSeconds / 60);
-    const seconds = Math.floor(totalSeconds % 60);
-    return `${mins}:${('0' + seconds).slice(-2)}`;
-  }
-
   return (
     <div className={`${className} flex`}>
       <i className="bi-stopwatch text-xl mr-1"></i>
-      <p className="text-xl">{convertTime(time)}</p>
+      <p className="text-xl">{formatTime(time)}</p>
     </div>
   )
 }
