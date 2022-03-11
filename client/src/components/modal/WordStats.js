@@ -1,15 +1,23 @@
 import { useState, useEffect } from 'react';
 
 const WordStats = ({
-  className
+  className,
+  startLoad
 }) => {
   const [loaded, setLoaded] = useState(false);
+  const [stats, setStats] = useState({
+    solvePercent: '-',
+    averageGuesses: '-',
+    averageTime: '-'
+  });
 
   useEffect(() => {
-    setTimeout(() => {
-      setLoaded(true);
-    }, 3000)
-  }, [])
+    if (startLoad) {
+      setTimeout(() => {
+        setLoaded(true);
+      }, 3000)
+    }
+  }, [startLoad])
 
   return (
     <div className={`${className}`}>
@@ -22,15 +30,15 @@ const WordStats = ({
         </div>
         <div className="flex ml-auto">
           <div className="flex flex-col items-center mr-3">
-            {loaded ? <p className="text-xl h-6">89%</p> : <div className="h-6 w-8 rounded pulse bg-gray-200"></div>}
+            {loaded ? <p className="text-xl h-6">{stats.solvePercent}</p> : <div className="h-6 w-8 rounded pulse bg-gray-200"></div>}
             <p className="text-xs text-gray-500 mt-1">solve %</p>
           </div>
           <div className="flex flex-col items-center mr-3">
-            {loaded ? <p className="text-xl h-6">3.6</p> : <div className="h-6 w-8 rounded pulse bg-gray-200"></div>}
+            {loaded ? <p className="text-xl h-6">{stats.averageGuesses}</p> : <div className="h-6 w-8 rounded pulse bg-gray-200"></div>}
             <p className="text-xs text-gray-500 mt-1">guesses</p>
           </div>
           <div className="flex flex-col items-center">
-            {loaded ? <p className="text-xl h-6">3:12</p> : <div className="h-6 w-8 rounded pulse bg-gray-200"></div>}
+            {loaded ? <p className="text-xl h-6">{stats.averageTime}</p> : <div className="h-6 w-8 rounded pulse bg-gray-200"></div>}
             <p className="text-xs text-gray-500 mt-1">time</p>
           </div>
         </div>
