@@ -48,5 +48,6 @@ const insertSolution = (solution, callback) => {
 
 module.exports = {
   getRandomAnswerWord: getRandomAnswerWord,
-  checkValidGuess: checkValidGuess
+  checkValidGuess: checkValidGuess,
+  insertSolution: insertSolution
 }

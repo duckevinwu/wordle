@@ -11,14 +11,14 @@ router.route('/')
   })
 
 router.route('/solution')
-  // POST /apiv1/solution - submit a solution
-  .post(async (req, res) => {
+  // POST /api/v1/game/solution - submit a solution
+  .post((req, res) => {
     const solutionData = req.body;
     gameService.insertSolution(solutionData, (result) => {
       if (result.status === 'error') {
-        res.status(500).send();
+        res.status(500).send({});
       } else {
-        res.status(200).send();
+        res.status(200).send({});
       }
     });
   })

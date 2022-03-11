@@ -52,4 +52,16 @@ const clearTables = () => {
   });
 }
 
+const renameColumn = () => {
+  const db = new sqlite3.Database(dbPath);
+  const query = `
+    ALTER TABLE Solution
+    RENAME COLUMN Attemps TO Attempts
+  `;
+  db.run(query, [], (err) => {
+    if (err) return console.log(err.message);
+    console.log('rename successful');
+  })
+}
+
 testSelect();

@@ -7,7 +7,8 @@ import GenerateChallenge from './GenerateChallenge';
 const WinModal = ({
   show,
   time,
-  answer
+  answer,
+  guesses
 }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [loaded, setLoaded] = useState(false);
@@ -18,11 +19,31 @@ const WinModal = ({
 
   useEffect(() => {
     if (isOpen) {
-      setTimeout(() => {
+      const data = {
+        word: answer,
+        dateSolved: Date.now(),
+        attempts: guesses.length,
+        solved: true,
+        startWord: guesses[0],
+        solveTime: time
+      };
+
+      fetch('http://localhost:8080/api/v1/game/solution', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+      })
+      .then(response => response.json())
+      .then(result => {
         setLoaded(true);
-      }, 3000)
+      })
+      .catch(error => {
+        console.log(error);
+      });
     }
-  }, [isOpen])
+  }, [isOpen, answer, guesses, time])
 
   return (
     <Transition
@@ -58,11 +79,11 @@ const WinModal = ({
               <div className="w-1/2 flex justify-end">
                 <div className="flex">
                   <div className="flex flex-col items-center mr-2">
-                    <p className="text-2xl">4</p>
+                    <p className="text-2xl">{guesses.length}</p>
                     <p className="text-xs text-gray-500">guesses</p>
                   </div>
                   <div className="flex flex-col items-center">
-                    <p className="text-2xl">2:45</p>
+                    <p className="text-2xl">{time}</p>
                     <p className="text-xs text-gray-500">time</p>
                   </div>
                 </div>

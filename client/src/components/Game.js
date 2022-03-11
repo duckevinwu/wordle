@@ -151,7 +151,7 @@ const Game = () => {
       </div>
       <Toast show={toast.show} message={toast.message} closeToast={closeToast} />
       <StartModal show={startModalOpen} start={startGame} loaded={loaded} />
-      <WinModal  show={winModalOpen} time={time} answer={answer} />
+      <WinModal  show={winModalOpen} time={time} answer={answer} guesses={guesses} />
       <LoseModal show={loseModalOpen} time={time} answer={answer} />
     </>
   )
