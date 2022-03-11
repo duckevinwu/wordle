@@ -36,7 +36,11 @@ router.route('/stats')
   .get((req, res) => {
     const word = req.query.word;
     gameService.getStats(word, (result) => {
-      console.log(result);
+      if (result.status === 'error') {
+        res.status(500).send({});
+      } else {
+        res.status(200).send(result.rows[0]);
+      }
     })
   })
 

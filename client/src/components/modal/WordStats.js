@@ -14,11 +14,21 @@ const WordStats = ({
 
   useEffect(() => {
     if (startLoad) {
-      setTimeout(() => {
-        setLoaded(true);
-      }, 3000)
+      fetch(`http://localhost:8080/api/v1/game/stats?word=${answer}`)
+        .then(response => response.json())
+        .then(result => {
+          setStats({
+            solvePercent: `${result.percent}%`,
+            averageGuesses: result.attempts,
+            averageTime: result.time
+          });
+          setLoaded(true);
+        })
+        .catch(error => {
+          console.log(error);
+        });
     }
-  }, [startLoad])
+  }, [startLoad, answer])
 
   return (
     <div className={`${className}`}>
