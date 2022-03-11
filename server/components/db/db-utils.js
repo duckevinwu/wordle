@@ -31,7 +31,7 @@ const testSelect = () => {
   const db = new sqlite3.Database(dbPath);
   const query = `
     SELECT *
-    FROM Challenge
+    FROM Solution
   `;
   db.all(query, [], (err, rows) => {
     if (err) return console.log(err.message);

@@ -37,7 +37,33 @@ const insertSolution = (solution, callback) => {
   });
 }
 
+// get stats for word from db
+const getStats = (word, callback) => {
+  const statsQuery = `
+    WITH solvePercent AS (
+      SELECT Word, SUM(CASE WHEN Solved = 1 THEN 1 ELSE 0 END) * 100 / COUNT(*) AS percent
+      FROM (
+        SELECT *
+        FROM Solution
+        WHERE Word = ?
+      ) wordTemp
+    ), averages AS (
+      SELECT Word, AVG(Attempts) as attempts, AVG(SolveTime) AS time
+      FROM Solution
+      WHERE Word = ? AND Solved = 1
+      GROUP BY Word
+    )
+    SELECT sp.Word as word, sp.percent, a.attempts, a.time
+    FROM solvePercent sp JOIN averages a ON sp.Word = a.Word
+  `;
+  const params = [word, word]
+  db.select(statsQuery, params, (res) => {
+    callback(res);
+  })
+}
+
 module.exports = {
   loadAllWords: loadAllWords,
-  insertSolution: insertSolution
+  insertSolution: insertSolution,
+  getStats: getStats
 }

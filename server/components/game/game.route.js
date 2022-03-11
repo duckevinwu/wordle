@@ -31,4 +31,13 @@ router.route('/valid')
     res.send(isValid);
   })
 
+router.route('/stats')
+  // GET /api/v1/game/stats - get stats for word
+  .get((req, res) => {
+    const word = req.query.word;
+    gameService.getStats(word, (result) => {
+      console.log(result);
+    })
+  })
+
 module.exports = router;

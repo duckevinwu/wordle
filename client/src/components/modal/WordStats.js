@@ -2,7 +2,8 @@ import { useState, useEffect } from 'react';
 
 const WordStats = ({
   className,
-  startLoad
+  startLoad,
+  answer
 }) => {
   const [loaded, setLoaded] = useState(false);
   const [stats, setStats] = useState({
@@ -25,7 +26,7 @@ const WordStats = ({
       <div className="flex items-center">
         <div className="flex w-1/3 justify-center">
           <div className=" border border-2 shadow-lg w-16 h-16 flex justify-center items-center rounded-full">
-            <p className="tracking-wide">hello</p>
+            <p className="tracking-wide">{answer}</p>
           </div>
         </div>
         <div className="flex ml-auto">

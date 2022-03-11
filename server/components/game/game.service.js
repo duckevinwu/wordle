@@ -46,8 +46,15 @@ const insertSolution = (solution, callback) => {
   });
 }
 
+const getStats = (word, callback) => {
+  gameDataAccess.getStats(word, (res) => {
+    callback(res);
+  })
+}
+
 module.exports = {
   getRandomAnswerWord: getRandomAnswerWord,
   checkValidGuess: checkValidGuess,
-  insertSolution: insertSolution
+  insertSolution: insertSolution,
+  getStats: getStats
 }
