@@ -40,9 +40,10 @@ const binarySearch = (word, list) => {
   return list.length > 0 && list[lo] === word;
 }
 
-const insertSolution = async (solution) => {
-  const status = await gameDataAccess.insertSolution(solution);
-  return status;
+const insertSolution = (solution, callback) => {
+  gameDataAccess.insertSolution(solution, (res) => {
+    callback(res);
+  });
 }
 
 module.exports = {

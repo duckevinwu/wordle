@@ -14,8 +14,13 @@ router.route('/solution')
   // POST /apiv1/solution - submit a solution
   .post(async (req, res) => {
     const solutionData = req.body;
-    const status = await gameService.insertSolution(solutionData);
-    res.send(status);
+    gameService.insertSolution(solutionData, (result) => {
+      if (result.status === 'error') {
+        res.status(500).send();
+      } else {
+        res.status(200).send();
+      }
+    });
   })
 
 router.route('/valid')

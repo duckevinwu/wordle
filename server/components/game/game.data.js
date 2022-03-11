@@ -25,15 +25,16 @@ const loadWordsTxt = async (path) => {
 }
 
 // insert solution data into db
-const insertSolution = async (solution) => {
+const insertSolution = (solution, callback) => {
   const {word, timeSolved, attempts, solved, startWord, solveTime} = solution;
   const insertQuery = `
     INSERT INTO Solution (Word, DateSolved, Attempts, Solved, StartWord, SolveTime)
     VALUES (?, ?, ?, ?, ?, ?)
   `;
   const params = [word, timeSolved, attempts, solved, startWord, solveTime];
-  const res = db.insert(insertQuery, params);
-  return res.status;
+  db.insert(insertQuery, params, (res) => {
+    callback(res);
+  });
 }
 
 module.exports = {
