@@ -80,29 +80,43 @@ const Game = () => {
       return;
     }
 
-    setRevealing(true);
-    const updatedGuesses = [...guesses, currGuess];
-    setGuesses(updatedGuesses);
-    setCurrGuess('');
+    fetch(`http://localhost:8080/api/v1/game/valid?word=${currGuess}`)
+      .then(response => response.json())
+      .then(result => {
+        if (!result.valid) {
+          setToast({
+            show: true,
+            message: 'Invalid word'
+          });
+          return;
+        }
+        setRevealing(true);
+        const updatedGuesses = [...guesses, currGuess];
+        setGuesses(updatedGuesses);
+        setCurrGuess('');
 
-    // check if won
-    if (currGuess === answer) {
-      setFinished(true);
-      setRevealing(false);
-      setClockActive(false);
-      setWinModalOpen(true);
-      return;
-    }
+        // check if won
+        if (currGuess === answer) {
+          setFinished(true);
+          setRevealing(false);
+          setClockActive(false);
+          setWinModalOpen(true);
+          return;
+        }
 
-    // check if lost
-    if (updatedGuesses.length === 6) {
-      setRevealing(false);
-      setClockActive(false);
-      setLoseModalOpen(true);
-      return;
-    }
+        // check if lost
+        if (updatedGuesses.length === 6) {
+          setRevealing(false);
+          setClockActive(false);
+          setLoseModalOpen(true);
+          return;
+        }
 
-    setRevealing(false);
+        setRevealing(false);
+      })
+      .catch(error => {
+        console.log(error);
+      });
   }
 
   // close toast

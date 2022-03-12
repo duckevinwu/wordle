@@ -25,10 +25,10 @@ router.route('/solution')
 
 router.route('/valid')
   // POST /api/v1/game/valid - check if word is valid guess
-  .post(async (req, res) => {
-    const word = req.body.guess;
+  .get(async (req, res) => {
+    const word = req.query.word;
     const isValid = await gameService.checkValidGuess(word);
-    res.send(isValid);
+    res.status(200).send({valid: isValid});
   })
 
 router.route('/stats')
