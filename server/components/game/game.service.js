@@ -48,7 +48,14 @@ const insertSolution = (solution, callback) => {
 
 const getStats = (word, callback) => {
   gameDataAccess.getStats(word, (res) => {
-    callback(res);
+    if (res.status === 'error') {
+      callback(res);
+    } else {
+      const result = res.rows[0];
+      if (result.attempts === null) result.attempts = '-';
+      if (result.time === null) result.time = '-';
+      callback(result);
+    }
   })
 }
 

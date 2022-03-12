@@ -54,7 +54,7 @@ const getStats = (word, callback) => {
       GROUP BY Word
     )
     SELECT sp.Word as word, sp.percent, a.attempts, a.time
-    FROM solvePercent sp JOIN averages a ON sp.Word = a.Word
+    FROM solvePercent sp LEFT JOIN averages a ON sp.Word = a.Word
   `;
   const params = [word, word]
   db.select(statsQuery, params, (res) => {

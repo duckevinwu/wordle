@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { formatTime } from '../../utils/utils.js';
+import { formatTime, formatToOneDecimal } from '../../utils/utils.js';
 
 const WordStats = ({
   className,
@@ -46,7 +46,7 @@ const WordStats = ({
             <p className="text-xs text-gray-500 mt-1">solve %</p>
           </div>
           <div className="flex flex-col items-center mr-3">
-            {loaded ? <p className="text-xl h-6">{stats.averageGuesses}</p> : <div className="h-6 w-8 rounded pulse bg-gray-200"></div>}
+            {loaded ? <p className="text-xl h-6">{formatToOneDecimal(stats.averageGuesses)}</p> : <div className="h-6 w-8 rounded pulse bg-gray-200"></div>}
             <p className="text-xs text-gray-500 mt-1">guesses</p>
           </div>
           <div className="flex flex-col items-center">

@@ -39,7 +39,7 @@ router.route('/stats')
       if (result.status === 'error') {
         res.status(500).send({});
       } else {
-        res.status(200).send(result.rows[0]);
+        res.status(200).send(result);
       }
     })
   })
