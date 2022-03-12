@@ -6,7 +6,8 @@ import GenerateChallenge from './GenerateChallenge';
 
 const LoseModal = ({
   show,
-  answer
+  answer,
+  guesses
 }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [loaded, setLoaded] = useState(false);
@@ -22,7 +23,7 @@ const LoseModal = ({
         dateSolved: 0,
         attempts: 0,
         solved: false,
-        startWord: '',
+        startWord: guesses[0],
         solveTime: 0
       };
 
@@ -41,7 +42,7 @@ const LoseModal = ({
         console.log(error);
       });
     }
-  }, [isOpen, answer])
+  }, [isOpen, answer, guesses])
 
   return (
     <Transition
@@ -69,7 +70,7 @@ const LoseModal = ({
           <WordStats className="w-full mb-10" startLoad={loaded} answer={answer} />
           <GenerateChallenge className="mb-2" answer={answer} />
           <a href="/" className="w-full">
-            <button className="w-full bg-black text-white p-2 rounded hover:bg-blue-400 hover:text-black transition duration-300">Play again</button>
+            <button className="w-full bg-black text-white p-2 rounded hover:bg-gray-200 hover:text-black transition duration-300">Play again</button>
           </a>
         </div>
       </div>

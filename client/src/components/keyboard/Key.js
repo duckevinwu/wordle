@@ -7,9 +7,9 @@ const Key = ({
   let additionalStyle = '';
 
   if (status === 'match') {
-    additionalStyle = 'bg-green-100'
+    additionalStyle = 'bg-black text-white'
   } else if (status === 'contains') {
-    additionalStyle = 'bg-yellow-100'
+    additionalStyle = 'border-black'
   } else if (status === 'no') {
     additionalStyle = 'bg-gray-100';
   }

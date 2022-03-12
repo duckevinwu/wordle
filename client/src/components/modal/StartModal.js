@@ -28,7 +28,7 @@ const StartModal = ({
           <p>Logo</p>
         </div>
         { loaded ?
-          <button onClick={start} className="w-full h-10 bg-black text-white p-2 rounded hover:bg-blue-400 hover:text-black transition duration-300">Start game</button>
+          <button onClick={start} className="w-full h-10 bg-black text-white p-2 rounded hover:bg-gray-200 hover:text-black transition duration-300">Start game</button>
           :
           <button className={`w-full h-10 bg-black text-white hover:bg-gray-600 transition duration-250 rounded p-2 flex justify-center items-center cursor-not-allowed`} disabled>
             <svg className="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">

@@ -94,7 +94,7 @@ const WinModal = ({
           <WordStats className="w-full mb-10" startLoad={loaded} answer={answer} />
           <GenerateChallenge className="mb-2" answer={answer} />
           <a href="/" className="w-full">
-            <button className="w-full bg-black text-white p-2 rounded hover:bg-blue-400 hover:text-black transition duration-300">Play again</button>
+            <button className="w-full bg-black text-white p-2 rounded hover:bg-gray-200 hover:text-black transition duration-300">Play again</button>
           </a>
         </div>
       </div>
