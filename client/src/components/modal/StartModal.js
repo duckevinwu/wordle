@@ -25,7 +25,7 @@ const StartModal = ({
     >
       <div className="p-3 w-72 border rounded-lg shadow-2xl bg-white flex flex-col items-center">
         <div className="flex h-36 items-center">
-          <p>Logo</p>
+          <p>Wordle</p>
         </div>
         { loaded ?
           <button onClick={start} className="w-full h-10 bg-black text-white p-2 rounded hover:bg-gray-200 hover:text-black transition duration-300">Start game</button>
