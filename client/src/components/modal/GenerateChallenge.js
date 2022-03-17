@@ -37,7 +37,7 @@ const GenerateChallenge = ({
     return <input className={`${className} w-full border border-black rounded p-2 caret-transparent text-center`} value={`localhost:3000/${challengeId}`} onFocus={selectLink} readOnly></input>
   } else if (status === 'not generated') {
     return (
-      <button onClick={generate} className={`${className} w-full border border-black rounded p-2 hover:border-blue-500 hover:text-blue-500 transition duration-250`}>
+      <button onClick={generate} className={`${className} w-full border border-black rounded p-2 hover:border-gray-400 hover:text-gray-500 transition duration-250`}>
         Challenge a friend
       </button>
     )

@@ -22,9 +22,7 @@ const Keyboard = ({
     guesses.forEach(word => {
       const set = new Set();
       for (let i = 0; i < word.length; i++) {
-        if (word.charAt(i) !== answer.charAt(i)) {
-          set.add(answer.charAt(i));
-        }
+        set.add(answer.charAt(i));
       }
 
       for (let i = 0; i < word.length; i++) {
