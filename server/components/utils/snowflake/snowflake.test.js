@@ -1,11 +1,15 @@
 const Snowflake = require('./snowflake.js');
 
-// test generate id
-const testGenerateId = () => {
+test('snowflake ids to be unique', () => {
   const snowflake = new Snowflake(0);
-  const id = snowflake.generateId();
-  console.log(id);
-}
+  const ids = [];
+  for (let i = 0; i < 10; i++) {
+    ids.push(snowflake.generateId());
+  }
 
-// run tests
-testGenerateId();
+  for (let i = 0; i < 10; i++) {
+    for (let j = i + 1; j < 10; j++) {
+      expect(ids[i]).not.toBe(ids[j]);
+    }
+  }
+});
